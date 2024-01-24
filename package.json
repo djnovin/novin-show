@@ -1,0 +1,26 @@
+{
+  "name": "novin-show",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "serve": "turbo run serve",
+    "preview": "turbo run preview"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-federation": "^1.3.4",
+    "bun-types": "latest",
+    "turbo": "^1.11.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
