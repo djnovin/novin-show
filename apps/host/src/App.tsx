@@ -7,11 +7,13 @@ import { Footer } from 'footer/Footer';
 import { Subscription } from 'marketing/Subscription';
 import { Campaigns } from 'marketing/Campaigns';
 import { Trending } from 'marketing/Trending';
+import DynamicComponent from './DynamicComponent';
 
 const App = () => {
   return (
     <main className='app'>
-      <div>
+      <DynamicComponent />
+      {/* <div>
         <Header />
       </div>
       <div>
@@ -21,7 +23,7 @@ const App = () => {
       <div>
         <Subscription />
         <Footer />
-      </div>
+      </div> */}
     </main>
   );
 };
