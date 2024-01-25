@@ -1,6 +1,17 @@
 import React, { ComponentProps } from 'react';
 
-export const Subscription = (props: ComponentProps<'div'>) => {
+interface SubscriptionProps {
+  title?: string;
+  description?: string;
+  cta?: string;
+  placeholder?: string;
+  buttonLabel?: string;
+  disclaimer?: string;
+}
+
+export const Subscription = (
+  props: ComponentProps<'div'> & SubscriptionProps
+) => {
   const { ...rest } = props;
   return (
     <div
@@ -8,37 +19,23 @@ export const Subscription = (props: ComponentProps<'div'>) => {
       {...rest}
     >
       <div className='flex flex-col gap-4'>
-        <h2 className='text-3xl font-bold'>NEVER MISS A THING</h2>
-        <p className='font-light'>
-          Sign up for promotions, tailored new arrivals, stock updates and more
-          – straight to your inbox
-        </p>
+        {props.title && <h2 className='text-3xl font-bold'>{props.title}</h2>}
+        {props.description && <p className='font-light'>{props.description}</p>}
       </div>
       <form className='flex flex-col gap-4'>
-        <p className='uppercase font-light'>GET UPDATES</p>
+        {props.cta && <h3 className='uppercase font-light'>{props.cta}</h3>}
         <input
           className='border border-gray-900 rounded-md px-4 py-2 font-light'
-          placeholder='Your email address'
-          type='text'
+          placeholder={props.placeholder || 'Email Address'}
+          type='email'
         />
         <button
           className='bg-gray-900 text-white px-4 py-2 rounded-md max-w-max self-start hover:bg-gray-700 duration-150 ease-in-out transition-all'
           type='submit'
         >
-          Sign Up
+          {props.buttonLabel || 'Subscribe'}
         </button>
-        <p className='font-light'>
-          By signing up, you consent to receiving marketing by email and/or SMS
-          and acknowledge you have read our{' '}
-          <a
-            className='underline'
-            href='/'
-          >
-            Privacy Policy
-          </a>
-          . Unsubscribe anytime at the bottom of our emails or by replying STOP
-          to any of our SMS.
-        </p>
+        {props.disclaimer && <p className='font-light'>{props.disclaimer}</p>}
       </form>
     </div>
   );

@@ -55,6 +55,17 @@ export default {
             },
           ],
         },
+        {
+          description: 'Subscription',
+          name: 'Subscription',
+          title: 'Subscription',
+          type: 'reference',
+          to: [
+            {
+              type: 'subscription',
+            },
+          ],
+        },
       ],
     },
   ],

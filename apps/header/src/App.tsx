@@ -3,7 +3,10 @@ import { Header } from './components/Header';
 const App = () => {
   return (
     <div>
-      <Header />
+      <Header
+        links={[]}
+        dropdowns={[]}
+      />
     </div>
   );
 };

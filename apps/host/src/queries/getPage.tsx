@@ -14,6 +14,12 @@ export const getPageBySlugQuery = groq`
         ...,
         _type == 'header' => {
             _type,
+            links[] {
+              ...
+                link -> {
+                  ...
+                }
+            },
         },
         _type == 'footer' => {
             _type,
@@ -23,6 +29,16 @@ export const getPageBySlugQuery = groq`
         },
         _type == 'campaign' => {
             _type,
+        },
+        _type == 'subscription' => {
+            _key,
+            _type,
+            buttonLabel,
+            cta,
+            description,
+            disclaimer,
+            placeholder,
+            title,
         },
       }
     }
@@ -51,10 +67,4 @@ export const fetcher = async (
   }
 
   return res;
-};
-
-export const getPageBySlug = async (slug: string) => {
-  const data = await fetcher(getPageBySlugQuery, { slug }, PageSchema);
-
-  return data;
 };

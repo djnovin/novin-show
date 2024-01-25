@@ -5,9 +5,33 @@ export default {
   type: 'document',
   fields: [
     {
-      description: 'This is the subscription.',
-      name: 'subscription',
-      title: 'Subscription',
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    },
+    {
+      name: 'cta',
+      title: 'CTA',
+      type: 'string',
+    },
+    {
+      name: 'placeholder',
+      title: 'Placeholder',
+      type: 'string',
+    },
+    {
+      name: 'buttonLabel',
+      title: 'Button Label',
+      type: 'string',
+    },
+    {
+      name: 'disclaimer',
+      title: 'Disclaimer',
       type: 'string',
     },
   ],

@@ -1,29 +1,48 @@
+import React from 'react';
 import { Campaigns } from 'marketing/Campaigns';
 import { Footer } from 'footer/Footer';
-import { Subscription } from 'marketing/Subscription';
 import { Header } from 'header/Header';
-import React from 'react';
-import { Trending } from 'marketing/Trending';
-import { useQuery } from '@tanstack/react-query';
 import { PageSchema } from './types';
+import { Subscription } from 'marketing/Subscription';
+import { Trending } from 'marketing/Trending';
 import { fetcher, getPageBySlugQuery } from './queries/getPage';
+import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-const fetchData = async () => {
+const fetchData = async (params: { slug: string }) => {
   const data = (await fetcher(
     getPageBySlugQuery,
-    { slug: '/' },
+    { slug: params.slug },
     PageSchema
   )) as z.infer<typeof PageSchema>;
+
+  console.log(data);
 
   return data;
 };
 
-const DynamicComponent = () => {
+interface DynamicComponentProps {
+  slug: string;
+}
+
+const DynamicComponent = (props: DynamicComponentProps) => {
+  const { slug } = props;
+
   const { data, error, isLoading } = useQuery({
     queryKey: ['page'],
-    queryFn: fetchData,
+    queryFn: () =>
+      fetchData({
+        slug,
+      }),
   });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   if (data) {
     return (
@@ -36,7 +55,8 @@ const DynamicComponent = () => {
               content = (
                 <Header
                   key={i}
-                  {...section}
+                  links={section.links}
+                  dropdowns={section.dropdown}
                 />
               );
               break;
@@ -80,14 +100,7 @@ const DynamicComponent = () => {
     );
   }
 
-  return (
-    <div
-      className='alert alert-danger'
-      role='alert'
-    >
-      Error
-    </div>
-  );
+  return null;
 };
 
 export default DynamicComponent;
